@@ -14,7 +14,7 @@ open index.html               # Interactive web demo
 # Problem 2: Currency Swap Form (React + Tailwind + Vite)
 cd src/problem2/react-app
 npm install --cache ./.npm-cache
-npm run dev                   # Start dev server at http://localhost:5173
+npm run dev                   # Start dev server at http://localhost:3000
 npm run build                 # Production build
 ```
 
@@ -39,6 +39,9 @@ code-challenge/
 │           │   └── lib/utils.ts       # Shared utilities
 │           ├── package.json
 │           └── README.md
+│   │
+│   └── problem3/          # Code review & refactor writeup
+│       └── README.md
 │
 └── README.md              # This file
 ```
@@ -103,6 +106,8 @@ sum_to_n_recursive(10);   // 55
 - 📦 Code-splitting with lazy loading
 - 🔄 Live price fetching from API
 - ✨ Loading indicators & error handling
+- 🛟 Client-side 404 fallback + static `public/404.html`
+- 🛟 Client-side 404 fallback + static `public/404.html`
 
 ### Features Implemented
 
@@ -134,7 +139,7 @@ npm install --cache ./.npm-cache
 
 # Development server (with hot reload)
 npm run dev
-# Open http://localhost:5173
+# Open http://localhost:3000
 
 # Production build
 npm run build
