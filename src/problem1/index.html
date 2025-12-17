@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem 1: Sum to N - Three Implementations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .results.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .result-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .result-time {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .explanation {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e3f2fd;
+            border-radius: 10px;
+        }
+
+        .explanation h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+
+        .method {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #90caf9;
+        }
+
+        .method:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .method h4 {
+            color: #1976d2;
+            margin-bottom: 8px;
+        }
+
+        .method p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧮 Sum to N Calculator</h1>
+        <p class="subtitle">Three unique implementations in JavaScript</p>
+
+        <div class="input-section">
+            <label for="numberInput">Enter a number (n):</label>
+            <input type="number" id="numberInput" placeholder="e.g., 5" value="5">
+            <button onclick="calculate()">Calculate Sum</button>
+        </div>
+
+        <div class="results" id="results">
+            <div class="result-item">
+                <div class="result-title">Method A: Iterative (For Loop)</div>
+                <div class="result-value" id="resultA">-</div>
+                <div class="result-time" id="timeA">-</div>
+            </div>
+            <div class="result-item">
+                <div class="result-title">Method B: Mathematical Formula</div>
+                <div class="result-value" id="resultB">-</div>
+                <div class="result-time" id="timeB">-</div>
+            </div>
+            <div class="result-item">
+                <div class="result-title">Method C: Recursive</div>
+                <div class="result-value" id="resultC">-</div>
+                <div class="result-time" id="timeC">-</div>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h3>📚 Implementation Details</h3>
+            
+            <div class="method">
+                <h4>Method A: Iterative Approach</h4>
+                <p>Uses a for loop to iterate from 1 to n, accumulating the sum. <strong>Time: O(n)</strong>, <strong>Space: O(1)</strong>. Simple and intuitive.</p>
+            </div>
+
+            <div class="method">
+                <h4>Method B: Mathematical Formula (Gauss)</h4>
+                <p>Uses the formula <code>n × (n + 1) / 2</code>. <strong>Time: O(1)</strong>, <strong>Space: O(1)</strong>. Most efficient - constant time calculation!</p>
+            </div>
+
+            <div class="method">
+                <h4>Method C: Recursive Approach</h4>
+                <p>Recursively calls itself with <code>n + sum_to_n(n-1)</code>. <strong>Time: O(n)</strong>, <strong>Space: O(n)</strong> due to call stack. Elegant but less efficient.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="sum_to_n.js"></script>
+    <script>
+        function calculate() {
+            const n = Number.parseInt(document.getElementById('numberInput').value);
+            
+            if (Number.isNaN(n)) {
+                alert('Please enter a valid number!');
+                return;
+            }
+
+            // Measure execution time for each implementation
+            const startA = performance.now();
+            const resultA = sum_to_n_a(n);
+            const endA = performance.now();
+
+            const startB = performance.now();
+            const resultB = sum_to_n_b(n);
+            const endB = performance.now();
+
+            const startC = performance.now();
+            const resultC = sum_to_n_c(n);
+            const endC = performance.now();
+
+            // Display results
+            document.getElementById('resultA').textContent = resultA.toLocaleString();
+            document.getElementById('timeA').textContent = `Execution time: ${(endA - startA).toFixed(6)} ms`;
+
+            document.getElementById('resultB').textContent = resultB.toLocaleString();
+            document.getElementById('timeB').textContent = `Execution time: ${(endB - startB).toFixed(6)} ms`;
+
+            document.getElementById('resultC').textContent = resultC.toLocaleString();
+            document.getElementById('timeC').textContent = `Execution time: ${(endC - startC).toFixed(6)} ms`;
+
+            // Show results section
+            document.getElementById('results').classList.add('show');
+        }
+
+        // Allow Enter key to trigger calculation
+        document.getElementById('numberInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                calculate();
+            }
+        });
+
+        // Calculate on page load with default value
+        window.onload = function() {
+            calculate();
+        };
+    </script>
+</body>
+</html>
+
